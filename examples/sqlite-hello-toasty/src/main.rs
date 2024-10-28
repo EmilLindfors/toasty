@@ -4,7 +4,7 @@ use std::path::PathBuf;
 use db::{Todo, User};
 
 use toasty::Db;
-use toasty_sqlite::Sqlite;
+use toasty_sqlite::r2d2_sqlite::AsyncSqlite;
 
 
 fn assert_sync_send<T: Send>(_: T) {}
@@ -19,7 +19,7 @@ async fn main() {
 
     // Use the in-memory toasty driver
     // let driver = Sqlite::new();
-    let driver = Sqlite::in_memory();
+    let driver = AsyncSqlite::in_memory().unwrap();
 
     let db = Db::new(schema, driver).await;
     // For now, reset!s

@@ -3,6 +3,9 @@ use toasty_core::{
     schema, sql, stmt, Schema,
 };
 
+#[cfg(feature = "r2d2_sqlite")]
+pub mod r2d2_sqlite;
+
 use anyhow::Result;
 use rusqlite::Connection;
 use std::{path::Path, sync::Mutex};
